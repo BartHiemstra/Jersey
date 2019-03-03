@@ -1,0 +1,28 @@
+<html>
+<head>
+	<title>DELETE</title>
+</head>
+<body>
+	<form id="deleteStudent">
+		ID: <input id="id" name="id" type="text">
+		<button id="deleteKnop">Verwijder</button>
+	</form>
+</body>
+<script>
+document.querySelector("#deleteKnop").addEventListener("click", function(){
+	var formData = new FormData(document.querySelector("#deleteStudent"));
+	var encData = new URLSearchParams(formData.entries());
+
+	fetch("webapi/student", {method: 'DELETE', body:encData})
+	.then(function(response){
+		if(response.status >= 200 && response.status < 300){
+			alert("Student is succesvol verwijderd.");
+			return response.json();
+		}
+		else {
+			alert("Errorcode geeft aan dat Student niet verwijderd kon worden.");s
+		}
+	})
+})
+</script>
+</html>
